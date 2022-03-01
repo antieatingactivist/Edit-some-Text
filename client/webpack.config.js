@@ -26,6 +26,8 @@ module.exports = () => {
         swSrc: "./src-sw.js",
       }),
       new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
         name: "Edit Some Text",
         short_name: "est",
         description: "as the name says!",
@@ -33,7 +35,6 @@ module.exports = () => {
         theme_color: "#7eb4e2",
         start_url: "/",
         publicPath: "/",
-        fingerprints: false,
         icons: [
           {
             src: path.resolve("./src/images/logo.png"),
