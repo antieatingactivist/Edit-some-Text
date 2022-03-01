@@ -35,7 +35,7 @@ export const getDb = async () => {
   if (result.length) {
     return result[result.length - 1].content;
   }
-  else return "Write your thoughts here...";
+  return;
   
 };
 
