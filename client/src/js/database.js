@@ -32,7 +32,11 @@ export const getDb = async () => {
   const request = store.getAll();
   const result = await request;
   console.log('result.value', result);
-  return result[result.length - 1].content;
+  if (result.length) {
+    return result[result.length - 1].content;
+  }
+  else return "Write your thoughts here...";
+  
 };
 
 initdb();
