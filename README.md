@@ -13,22 +13,31 @@ This is a basic code-aware text editor that is a fully installable Progressive W
 
 ##
 
-- Model View Controller (MVC) structure is used with Handlebars.
+- IndexedDB is used for data persistance.
 
-`const exphbs = require('express-handlebars');`
-- Express Router is used for all API routes
 ```
-const router = require('express').Router();
-
-const userRoutes = require('./user-routes');
-const postRoutes = require('./post-routes');
+  export const putDb = async (content) => {
+  console.log('PUT to the database');
+  const editSomeTextDb = await openDB('editSomeText', 1);
+  const tx = editSomeTextDb.transaction('editSomeText', 'readwrite');
+  const store = tx.objectStore('editSomeText');
+  const request = store.put({ content: content });
+  const result = await request;
+  console.log('🚀 - data saved to the database', result);
+} 
+```
+- A service worker is registered with the browser to enable offline functionality and installability.
+```
+if ('serviceWorker' in navigator) {
+  // register workbox service worker
+  const workboxSW = new Workbox('/src-sw.js');
+  workboxSW.register();
+} else {
+  console.error('Service workers are not supported in this browser.');
+}
 ```
 
-- App is deployed on Heroku using JawsDB for the database.
 
-`if (process.env.JAWSDB_URL) {
-  sequelize = new Sequelize(process.env.JAWSDB_URL);
-}`
 
 
 <img width="948" alt="Screen Shot 2022-03-01 at 9 14 38 PM" src="https://user-images.githubusercontent.com/1414728/156299673-38f24309-7199-40fa-9a5f-651629d316be.png">
